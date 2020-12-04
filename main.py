@@ -24,6 +24,12 @@ def sign_up():
         return render_template('sign-in.html')
 
 
+@app.route('/home/', methods=['POST', 'GET'])
+def sign_up():
+    if request.method == "POST":
+        pass
+    else:
+        return render_template('user.html')
 
 
 app.run(debug=True)
