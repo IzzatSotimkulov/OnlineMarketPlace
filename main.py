@@ -25,7 +25,7 @@ def sign_up():
 
 
 @app.route('/home/', methods=['POST', 'GET'])
-def sign_up():
+def home():
     if request.method == "POST":
         pass
     else:

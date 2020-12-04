@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Войти в MarketPlace
+{% endblock %}
+
+{% block extra %}{% endblock %}
+
+{% block content %}
+
+<form method="post">
+  <div class="form-group">
+    <label for="email">Email:</label>
+    <input type="email" id="email" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="password">Пароль:</label>
+    <div class="input-group">
+      <input type="password" id="password" class="form-control">
+      <div class="input-group-append">
+        <a href="#" class="btn btn-outline-dark" onclick="retype_password('#password', '#password-visibility-icon')"><i id="password-visibility-icon" class="material-icons">visibility</i></a>
+      </div>
+    </div>
+  </div>
+</form>
+
+<script type="text/javascript">
+  function retype_password(element_id,icon_id)
+  {
+    let
+      element = $(element_id),
+      icon = $(icon_id);
+    if (icon.html() == "visibility")
+    {
+      element.attr('type', 'text');
+      icon.html("visibility_off");
+    }
+    else if (icon.html() == "visibility_off")
+    {
+      element.attr('type', 'password');
+      icon.html("visibility");
+    }
+    else
+    {
+      console.log("Problem:\n\tElement id: " + element.attr('id') + "\n\tIcon id: " + icon.attr('id') + "\n\tIcon content: " + icon.html());
+    }
+  }
+
+  $(document).ready(function(){
+    $("#password").css('height',$(".input-group-append").css('height'));
+  });
+</script>
+{% endblock %}
