@@ -9,10 +9,15 @@ db = SQLAlchemy(app)
 
 class Company(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(200), nullable=False)
+    company_name = db.Column(db.String(200), nullable=False)
+    brand_name = db.Column(db.String(200), nullable=False)
     description = db.Column(db.Text, default='')
     okonh_code = db.Column(db.Integer, nullable=False)
-    date = datetime.now()
+    date = db.Column(db.Datetime, nullable=False)
+
+
+class User(db.Model):
+
 
 
 @app.route('/')
@@ -52,6 +57,9 @@ def companies():
         companies = Company.query.order_by().all()
         return render_template('companies.html', data = companies)
 
+
+@app.route('/companies/<str::name>', methods=['POST','GET'])
+def view_company(name):
 
 
 
