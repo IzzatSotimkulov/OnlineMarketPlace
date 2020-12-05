@@ -1,22 +1,47 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="author" content="Izzat Sotimkulov">
-    <meta name="viewport" content="initial-scale=1;width=device-width">
-    <title>Company | MaarketPlace</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="../static/css/style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  </head>
-  <body>
+{% extends 'base.html' %}
 
+{% block title %}
+Company | MarketPlace
+{% endblock %}
 
+{% block extra %}
+{% endblock %}
 
+{% block content %}
+<div class="row rounded">
+  <div class="col-6" style="padding-right: 20px;">
+    <img src="https://cdn4.iconfinder.com/data/icons/seo-104/100/icon-23-512.png" class="img-fluid rounded-circle" alt="Company Image" title="Company Name">
+  </div>
+  <div class="col-6">
+    <p style="text-indent: 100px;">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+  </div>
+</div>
+<div class="container">
+  <ul class="list-group">
+    <li class="list-group-item"><strong>Название:</strong> Компания Lorem</li>
+    <li class="list-group-item"><strong>Тип:</strong> Акционерное предприятие</li>
+    <li class="list-group-item"><strong>Размер компании:</strong> 100 000 сотрудников</li>
+    <li class="list-group-item"><strong>Отрасль:</strong> Все отрасли</li>
+    <li class="list-group-item"><strong>Специализация:</strong> Всё</li>
+  </ul>
+  <div class="btn-group btn-group-lg">
+    <a href="#" class="btn btn-dark">Продукты</a>
+    <a href="#" class="btn btn-light">Сотрудники</a>
+    <a href="#" class="btn btn-dark">Вакансии</a>
+  </div>
+</div>
+<!-- Here wiil be posts from company -->
+<div id="wall">
+  <!-- Post example -->
+  <div class="post" style="margin-top: 30px;">
+    <figure class="figure">
+      <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" class="figure-image img-fluid">
+      <figcaption class="figure-caption">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</figcaption>
+    </figure>
+  </div>
+</div>
+{% endblock %}
 
+{% block scripts %}
 
-  </body>
-</html>
+{% endblock %}
