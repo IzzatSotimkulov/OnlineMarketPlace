@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, make_response
 from flask_sqlalchemy import SQLAlchemy
+import sqlite3
 from datetime import datetime
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///marketplace.db'
@@ -9,9 +10,9 @@ db = SQLAlchemy(app)
 
 
 class Company(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    company_name = db.Column(db.String(200), nullable=False)
+    company_name = db.Column(db.String(200), primary_key=True)
     brand_name = db.Column(db.String(200), nullable=False)
+    specialization = db.Column(db.String(256), nullable=False)
     description = db.Column(db.Text, default='')
     date = db.Column(db.DateTime, nullable=False)
     index = db.Column(db.String(100), nullable=False)
@@ -28,17 +29,17 @@ class Company(db.Model):
 
 
 class User(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     surname = db.Column(db.String(100), nullable=False)
     particular_name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), primary_key=True)
     username = db.Column(db.String(100), default="")
     has_work = db.Column(db.Boolean, default=False)
     work_in = db.Column(db.String(256), default="")
     companies = db.Column(db.Text, default="")
     phone_number = db.Column(db.String(14), default="")
     password = db.Column(db.String(256), nullable=False)
+    date = db.Column(db.DateTime, default=datetime.now())
 
 
 @app.route('/')
@@ -53,8 +54,11 @@ def sign_up():
         try:
             db.session.add(user)
             db.session.commit()
+            response = make_response(render_template("sign-up.html"))
+            response.set_cookie('MarketPlace_username', user.email)
+            return redirect('/')
         except:
-            return "Error while reqistration!"
+            return "error"
     else:
         return render_template('sign-up.html')
 
@@ -64,7 +68,15 @@ def sign_in():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-
+        user = User.query.get(username)
+        if user is None:
+            return render_template('sign-in.html',  data="<span class='text-danger'>Такой пользователь не существует</span>")
+        elif user.password != password:
+            return render_template('sign-in.html', data="<span class='text-danger'>Неверный пароль</span>")
+        else:
+            response = make_response(render_template("user.html"))
+            response.set_cookie("MarketPlace_username", username)
+            return redirect("/home/")
     else:
         return render_template('sign-in.html')
 
@@ -74,7 +86,12 @@ def home():
     if request.method == "POST":
         pass
     else:
-        return render_template('user.html')
+        email = request.cookies.get("MarketPlace_username")
+        if email is None:
+            return redirect("/sign-in/")
+        else:
+            user = User.query.get(email)
+            return render_template("user.html", data=user)
 
 
 @app.route('/companies/', methods=['POST', 'GET'])
@@ -82,21 +99,31 @@ def companies():
     if request.method == "POST":
         pass
     else:
-        companies = Company.query.order_by().all()
+        companies = Company.query.order_by(Company.date.desc()).all()
         return render_template('companies.html', data = companies)
 
 
-@app.route('/companies/<string:company_name>', methods=['POST','GET'])
+@app.route('/companies/<string:company_name>')
 def view_company(company_name):
-    pass
+    company = Company.query.get(company_name)
+    if company is None:
+        return "Error 404"
+    else:
+        return render_template("company.html", data=company)
 
-
+# Company admin panel
 @app.route('/admin/', methods=['POST', 'GET'])
-def add_product(company_name):
+def admin(company_name):
     if request.method == "POST":
         pass
     else:
-        return render_template("add_product.html")
+        return render_template("admin.html")
+
+@app.route('/admin/support/', methods=['POST', 'GET'])
+def admin_support():
+    pass
 
 
-app.run(debug=True)
+@app.route('/companies/<string:company_name>/support/', methods=['POST', 'GET'])
+def support(company_name):
+    pass
