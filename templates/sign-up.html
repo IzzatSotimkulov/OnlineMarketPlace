@@ -8,32 +8,32 @@
 {% endblock %}
 
 {% block content %}
-<h2>Зарегистрирваться на MarketPlace</h2>
+<h2>Зарегистрироваться в MarketPlace</h2>
 <form method="post">
   <div class="row">
     <div class="col-6">
       <div class="form-group">
         <label for="first_name">Имя: <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="first_name">
+        <input type="text" class="form-control" name="first_name" id="first_name">
       </div>
       <div class="form-group">
         <label for="last_name">Фамилия: <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="last_name">
+        <input type="text" class="form-control" name="last_name" id="last_name">
       </div>
       <div class="form-group">
         <label for="particular_name">Отчество: <span class="text-danger">*</span></label>
-        <input type="text" class="form-control" id="particular_name">
+        <input type="text" class="form-control" name="particular_name" id="particular_name">
       </div>
       <div class="form-group">
         <label for="email">Email: <span class="text-danger">*</span></label>
-        <input type="email" id="email" class="form-control">
+        <input type="email" id="email" name="email" class="form-control">
       </div>
     </div>
     <div class="col-6">
       <div class="form-group">
         <label for="password">Пароль:<span class="text-danger">*</span></label>
         <div class="input-group">
-          <input type="password" id="password" class="form-control">
+          <input type="password" id="password" name="password" class="form-control">
           <div class="input-group-append">
             <a href="#" class="btn btn-outline-dark" onclick="retype_password('#password', '#password-visibility-icon')"><i id="password-visibility-icon" class="material-icons">visibility</i></a>
           </div>
@@ -42,7 +42,7 @@
       <div class="form-group">
         <label for="confirm_password">Подтвердите пароль:<span class="text-danger">*</span></label>
         <div class="input-group">
-          <input type="password" id="confirm_password" class="form-control">
+          <input type="password" id="confirm_password" name="confirm_password" class="form-control">
           <div class="input-group-append">
             <a href="#" class="btn btn-outline-dark" onclick="retype_password('#confirm_password', '#confirm-password-visibility-icon')"><i id="confirm-password-visibility-icon" class="material-icons">visibility</i></a>
           </div>
@@ -50,8 +50,6 @@
       </div>
     </div>
   </div>
-
-
   <input type="submit" class="btn btn-dark">
 </form>
 <script type="text/javascript">
@@ -77,8 +75,8 @@
   }
 
   $(document).ready(function(){
-    $("#password").css('height',$(".input-group-append").css('height'));
-    $("#confirm_password").css('height',$(".input-group-append").css('height'));
+    $("#password").css('height', $(".input-group-append").css('height'));
+    $("#confirm_password").css('height' , $(".input-group-append").css('height'));
   });
 </script>
 {% endblock%}

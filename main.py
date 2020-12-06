@@ -29,14 +29,16 @@ class Company(db.Model):
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(30), nullable=False)
-    surname = db.Column(db.String(40), nullable=False)
-    particular_name = db.Column(db.String(40), nullable=False)
-    email = db.Column(db.String(50), nullable="False")
+    name = db.Column(db.String(100), nullable=False)
+    surname = db.Column(db.String(100), nullable=False)
+    particular_name = db.Column(db.String(100), nullable=False)
+    email = db.Column(db.String(100), nullable=False)
     username = db.Column(db.String(100), default="")
     has_work = db.Column(db.Boolean, default=False)
     work_in = db.Column(db.String(256), default="")
+    companies = db.Column(db.Text, default="")
     phone_number = db.Column(db.String(14), default="")
+    password = db.Column(db.String(256), nullable=False)
 
 
 @app.route('/')
@@ -47,7 +49,12 @@ def index():
 @app.route('/sign-up/', methods=['POST', 'GET'])
 def sign_up():
     if request.method == 'POST':
-        pass
+        user = User(name = request.form['first_name'], email = request.form['email'], surname = request.form['last_name'], particular_name = request.form['particular_name'], password = request.form['password'])
+        try:
+            db.session.add(user)
+            db.session.commit()
+        except:
+            return "Error while reqistration!"
     else:
         return render_template('sign-up.html')
 
@@ -55,7 +62,9 @@ def sign_up():
 @app.route('/sign-in/', methods=['POST', 'GET'])
 def sign_in():
     if request.method == 'POST':
-        pass
+        username = request.form['username']
+        password = request.form['password']
+
     else:
         return render_template('sign-in.html')
 
@@ -77,6 +86,17 @@ def companies():
         return render_template('companies.html', data = companies)
 
 
-@app.route('/companies/<int:id>', methods=['POST','GET'])
-def view_company(name):
+@app.route('/companies/<string:company_name>', methods=['POST','GET'])
+def view_company(company_name):
     pass
+
+
+@app.route('/admin/', methods=['POST', 'GET'])
+def add_product(company_name):
+    if request.method == "POST":
+        pass
+    else:
+        return render_template("add_product.html")
+
+
+app.run(debug=True)
