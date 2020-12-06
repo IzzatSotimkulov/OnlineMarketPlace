@@ -121,9 +121,18 @@ def admin(company_name):
 
 @app.route('/admin/support/', methods=['POST', 'GET'])
 def admin_support():
-    pass
+    if request.method == 'POST':
+        pass
+    else:
+        return render_template("admin_support.html")
 
 
 @app.route('/companies/<string:company_name>/support/', methods=['POST', 'GET'])
 def support(company_name):
-    pass
+    if request.method == 'POST':
+        pass
+    else:
+        company = Company.query.get(company_name)
+        if company is None:
+            return "Error 404"
+        return render_template("support.html", data=company)

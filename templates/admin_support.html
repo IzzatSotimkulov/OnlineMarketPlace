@@ -1,0 +1,29 @@
+{% extends 'admin.html' %}
+
+{$ block title $}
+Поддержка | {{data.brand_name}}
+{% endblock %}
+
+{% block extra %}{% endblock %}
+
+{% endblock %}
+
+{% block content %}
+
+
+
+<nav class="navbar navbar-dark bg-dark navbar-expand-sm fixed-bottom">
+	<form class="form-inline">
+		<div class="input-group">
+			<input type="text" name="search" class="form-control">
+			<div class="input-group-append">
+				<input type="submit" class="btn btn-light">
+			</div>
+		</div>
+	</form>
+</nav>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

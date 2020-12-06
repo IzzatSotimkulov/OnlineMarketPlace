@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="initial-scale=1;width=device-width">
     <meta name="author" content="Izzat Sotimkulov">
-    <title></title>
+    <title>{% block title %}{% endblock %}</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="../static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
@@ -21,15 +21,27 @@
         <div class="col-4">
           <ul class="nav nav-pills">
             <li class="nav-item">
-              <a href="#" class="nav-link"></a>
+              <a href="#" class="nav-link">Объявления</a>
             </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Поддержка</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Сотрудники</a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="nav-link">Продукты/Услуги</a>
+            </li>
+            
           </ul>
         </div>
         <div class="col-8">
-
+          {% block content %}
+            
+          {% endblock %}
         </div>
       </div>
     </div>
-
+    {$ block scripts $}{% endblock %}
   </body>
 </html>
