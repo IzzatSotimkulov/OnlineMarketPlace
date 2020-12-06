@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Компании | MarketPlace
+{% endblock %}
+
+{% block extra %}{% endblock %}
+
+{% block content %}
+<ul class="list-group">
+  {% for el in data: %}
+  <li class="list-group-item">
+    <div class="row">
+      <div class="col-5">
+        <img src="https://cdn4.iconfinder.com/data/icons/seo-104/100/icon-23-512.png" class="img-fluid rounded-circle" alt="Company Image" title="Company Logo">
+      </div>
+      <div class="col-7">
+        <ul class="list-group">
+          <li class="list-group-item">Название: {{el.brand_name}}</li>
+          <li class="list-group-item">Отрасль: {{el.specialization}}</li>
+        </ul>
+        <a href="/company/{{el.company_name}}" class="btn btn-outline-dark">Подробнее</a>
+      </div>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
